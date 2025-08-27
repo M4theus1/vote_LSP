@@ -1,6 +1,7 @@
 package br.com.voting.vote.services.impl;
 
 import br.com.voting.vote.dtos.AssociateDTO;
+import br.com.voting.vote.exception.ApiException;
 import br.com.voting.vote.exception.NotFoundException;
 import br.com.voting.vote.models.Associate;
 import br.com.voting.vote.repositories.AssociateRepository;

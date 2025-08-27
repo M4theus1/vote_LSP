@@ -3,15 +3,11 @@ package br.com.voting.vote.exception;
 import java.time.LocalDateTime;
 
 public class ExceptionDetails {
-    protected String title;
-    protected int status;
-    protected String details;
-    protected String developerMessage;
-    protected LocalDateTime timestamp;
-
-    public ExceptionDetails(){
-
-    }
+    private final String title;
+    private final int status;
+    private final String details;
+    private final String developerMessage;
+    private final LocalDateTime timestamp;
 
     public ExceptionDetails(String title, int status, String details, String developerMessage, LocalDateTime timestamp) {
         this.title = title;
@@ -20,6 +16,17 @@ public class ExceptionDetails {
         this.developerMessage = developerMessage;
         this.timestamp = timestamp;
     }
+
+    public static ExceptionDetails fromException(ApiException exception) {
+        return new ExceptionDetails(
+                exception.getStatus().getReasonPhrase(),
+                exception.getStatus().value(),
+                exception.getMessage(),
+                exception.getClass().getName(),
+                LocalDateTime.now()
+        );
+    }
+
 
     public String getTitle() {
         return title;
@@ -39,35 +46,6 @@ public class ExceptionDetails {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
-    }
-
-    public ExceptionDetails title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    public ExceptionDetails status(int status) {
-        this.status = status;
-        return this;
-    }
-
-    public ExceptionDetails details(String details) {
-        this.details = details;
-        return this;
-    }
-
-    public ExceptionDetails developerMessage(String developerMessage) {
-        this.developerMessage = developerMessage;
-        return this;
-    }
-
-    public ExceptionDetails timestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-        return this;
-    }
-
-    public ExceptionDetails build() {
-        return new ExceptionDetails(title, status, details, developerMessage, timestamp);
     }
 
 }
